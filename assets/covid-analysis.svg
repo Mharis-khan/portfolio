@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 792" width="1200" height="792" font-family="Segoe UI,Helvetica Neue,Arial,sans-serif">
+<rect width="1200" height="792" rx="14" fill="#0F1411"/>
+<text x="26.0" y="42.0" font-size="19" font-weight="800" fill="#E8F0EA" text-anchor="start" opacity="1">COVID-19 Global Analysis</text>
+<text x="26.0" y="62.0" font-size="11.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">WHO, United Nations and World Bank data, restricted to 2022</text>
+<rect x="24.0" y="86" width="274.5" height="88" rx="10" fill="#131A16" stroke="#1E2A22"/>
+<rect x="24.0" y="86" width="274.5" height="3" rx="1.5" fill="#4ADE80"/>
+<text x="40.0" y="140.0" font-size="26" font-weight="800" fill="#4ADE80" text-anchor="start" opacity="1">383,720</text>
+<text x="40.0" y="160.0" font-size="10.5" font-weight="600" fill="#8A9A90" text-anchor="start" opacity="1">Records</text>
+<rect x="316.5" y="86" width="274.5" height="88" rx="10" fill="#131A16" stroke="#1E2A22"/>
+<rect x="316.5" y="86" width="274.5" height="3" rx="1.5" fill="#4ADE80"/>
+<text x="332.5" y="140.0" font-size="26" font-weight="800" fill="#4ADE80" text-anchor="start" opacity="1">243</text>
+<text x="332.5" y="160.0" font-size="10.5" font-weight="600" fill="#8A9A90" text-anchor="start" opacity="1">Countries</text>
+<rect x="609.0" y="86" width="274.5" height="88" rx="10" fill="#131A16" stroke="#1E2A22"/>
+<rect x="609.0" y="86" width="274.5" height="3" rx="1.5" fill="#4ADE80"/>
+<text x="625.0" y="140.0" font-size="26" font-weight="800" fill="#4ADE80" text-anchor="start" opacity="1">67</text>
+<text x="625.0" y="160.0" font-size="10.5" font-weight="600" fill="#8A9A90" text-anchor="start" opacity="1">Features</text>
+<rect x="901.5" y="86" width="274.5" height="88" rx="10" fill="#131A16" stroke="#1E2A22"/>
+<rect x="901.5" y="86" width="274.5" height="3" rx="1.5" fill="#4ADE80"/>
+<text x="917.5" y="140.0" font-size="26" font-weight="800" fill="#4ADE80" text-anchor="start" opacity="1">6</text>
+<text x="917.5" y="160.0" font-size="10.5" font-weight="600" fill="#8A9A90" text-anchor="start" opacity="1">Continents</text>
+<rect x="24.0" y="194.0" width="564.0" height="268.0" rx="10" fill="#131A16" stroke="#1E2A22"/>
+<text x="306.0" y="220.0" font-size="13" font-weight="700" fill="#E8F0EA" text-anchor="middle" opacity="1">Variance explained (R²)</text>
+<text x="306.0" y="238.0" font-size="10.5" font-weight="500" fill="#8A9A90" text-anchor="middle" opacity="1">Predicting deaths. Higher is better.</text>
+<text x="52.0" y="296.0" font-size="12" font-weight="700" fill="#8A9A90" text-anchor="start" opacity="1">Prophet</text>
+<rect x="174" y="280" width="364.0" height="26" rx="5" fill="#1F2B24"/>
+<rect x="174" y="280" width="3.0" height="26" rx="5" fill="#F4B740"/>
+<text x="560.0" y="298.0" font-size="13" font-weight="800" fill="#F4B740" text-anchor="end" opacity="1">0.0006</text>
+<text x="52.0" y="374.0" font-size="12" font-weight="700" fill="#8A9A90" text-anchor="start" opacity="1">Decision tree</text>
+<rect x="174" y="358" width="364.0" height="26" rx="5" fill="#1F2B24"/>
+<rect x="174" y="358" width="333.4" height="26" rx="5" fill="#4ADE80"/>
+<text x="560.0" y="376.0" font-size="13" font-weight="800" fill="#4ADE80" text-anchor="end" opacity="1">0.916</text>
+<text x="52.0" y="434.0" font-size="10.5" font-weight="600" fill="#8A9A90" text-anchor="start" opacity="1">The time series model explained almost none of it.</text>
+<rect x="612.0" y="194.0" width="564.0" height="268.0" rx="10" fill="#131A16" stroke="#1E2A22"/>
+<text x="894.0" y="220.0" font-size="13" font-weight="700" fill="#E8F0EA" text-anchor="middle" opacity="1">Prediction error</text>
+<text x="894.0" y="238.0" font-size="10.5" font-weight="500" fill="#8A9A90" text-anchor="middle" opacity="1">Lower is better.</text>
+<text x="640.0" y="272.0" font-size="11" font-weight="800" fill="#8A9A90" text-anchor="start" opacity="1">MAE</text>
+<rect x="720.0" y="284" width="334.8" height="17" rx="4" fill="#F4B740"/>
+<text x="712.0" y="297.0" font-size="9.5" font-weight="600" fill="#8A9A90" text-anchor="end" opacity="1">Prophet</text>
+<text x="1058.8" y="297.0" font-size="10" font-weight="700" fill="#E8F0EA" text-anchor="start" opacity="1">110.4</text>
+<rect x="720.0" y="310" width="62.0" height="17" rx="4" fill="#4ADE80"/>
+<text x="712.0" y="323.0" font-size="9.5" font-weight="600" fill="#8A9A90" text-anchor="end" opacity="1">Decision tree</text>
+<text x="786.0" y="323.0" font-size="10" font-weight="700" fill="#E8F0EA" text-anchor="start" opacity="1">20.4</text>
+<text x="640.0" y="366.0" font-size="11" font-weight="800" fill="#8A9A90" text-anchor="start" opacity="1">RMSE</text>
+<rect x="720.0" y="378" width="339.2" height="17" rx="4" fill="#F4B740"/>
+<text x="712.0" y="391.0" font-size="9.5" font-weight="600" fill="#8A9A90" text-anchor="end" opacity="1">Prophet</text>
+<text x="1063.2" y="391.0" font-size="10" font-weight="700" fill="#E8F0EA" text-anchor="start" opacity="1">838.6</text>
+<rect x="720.0" y="404" width="156.9" height="17" rx="4" fill="#4ADE80"/>
+<text x="712.0" y="417.0" font-size="9.5" font-weight="600" fill="#8A9A90" text-anchor="end" opacity="1">Decision tree</text>
+<text x="880.9" y="417.0" font-size="10" font-weight="700" fill="#E8F0EA" text-anchor="start" opacity="1">387.9</text>
+<rect x="24.0" y="486.0" width="564.0" height="282.0" rx="10" fill="#131A16" stroke="#1E2A22"/>
+<text x="306.0" y="512.0" font-size="13" font-weight="700" fill="#E8F0EA" text-anchor="middle" opacity="1">What the data said</text>
+<circle cx="54" cy="550" r="4" fill="#4ADE80"/>
+<text x="70.0" y="554.0" font-size="12" font-weight="700" fill="#E8F0EA" text-anchor="start" opacity="1">Asia had the highest case rate</text>
+<text x="70.0" y="572.0" font-size="10.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">then Europe, then North America</text>
+<circle cx="54" cy="604" r="4" fill="#4ADE80"/>
+<text x="70.0" y="608.0" font-size="12" font-weight="700" fill="#E8F0EA" text-anchor="start" opacity="1">South America died more, caught less</text>
+<text x="70.0" y="626.0" font-size="10.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">higher mortality on lower case counts</text>
+<circle cx="54" cy="658" r="4" fill="#4ADE80"/>
+<text x="70.0" y="662.0" font-size="12" font-weight="700" fill="#E8F0EA" text-anchor="start" opacity="1">Cases peaked in different seasons</text>
+<text x="70.0" y="680.0" font-size="10.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">by continent, a clear seasonal signal</text>
+<circle cx="54" cy="712" r="4" fill="#4ADE80"/>
+<text x="70.0" y="716.0" font-size="12" font-weight="700" fill="#E8F0EA" text-anchor="start" opacity="1">Oceania stayed low throughout</text>
+<text x="70.0" y="734.0" font-size="10.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">fewest cases and fewest outliers</text>
+<rect x="612.0" y="486.0" width="564.0" height="282.0" rx="10" fill="#131A16" stroke="#1E2A22"/>
+<text x="894.0" y="512.0" font-size="13" font-weight="700" fill="#E8F0EA" text-anchor="middle" opacity="1">Where the data misleads</text>
+<text x="640.0" y="552.0" font-size="12.5" font-weight="700" fill="#F4B740" text-anchor="start" opacity="1">Handwashing access went UP with cases.</text>
+<text x="640.0" y="572.0" font-size="12.5" font-weight="700" fill="#F4B740" text-anchor="start" opacity="1">So did GDP per capita.</text>
+<text x="640.0" y="606.0" font-size="11.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">Neither says hygiene or wealth spread the virus.</text>
+<text x="640.0" y="628.0" font-size="11.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">Reported cases count the infections a country</text>
+<text x="640.0" y="650.0" font-size="11.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">is able to find. Richer countries test more, so</text>
+<text x="640.0" y="672.0" font-size="11.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">they report more. The variable measures</text>
+<text x="640.0" y="694.0" font-size="11.5" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="1">detection capacity as much as infection.</text>
+<rect x="640.0" y="716" width="508.0" height="2" rx="1" fill="#1E2A22"/>
+<text x="640.0" y="740.0" font-size="11" font-weight="700" fill="#4ADE80" text-anchor="start" opacity="1">The finding was about measurement, not the virus.</text>
+<text x="26.0" y="782.0" font-size="10" font-weight="500" fill="#8A9A90" text-anchor="start" opacity="0.75">Rebuilt for this portfolio from the published analysis.</text>
+</svg>
