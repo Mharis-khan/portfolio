@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeeny case study | Muhammad Haris Khan</title>
+<meta name="description" content="The client thought they had a driver supply problem. A 72.3% idle rate said otherwise. Power BI and Python analysis of a ride hailing demand funnel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080B09; --surface:#0F1411; --surface-2:#141A16; --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.14); --tx:#E9EFEA; --tx-2:#98A69D; --tx-3:#6B7A71;
+  --green:#4ADE80; --green-br:#5BE49B; --green-dim:rgba(74,222,128,.12);
+  --amber:#F4B740; --amber-dim:rgba(244,183,64,.12);
+  --red:#F87171; --red-dim:rgba(248,113,113,.12);
+  --maxw:980px; --r:14px;
+}
+[data-theme="light"]{
+  --bg:#F7F9F7; --surface:#FFFFFF; --surface-2:#F1F4F2; --line:rgba(8,20,12,.10);
+  --line-2:rgba(8,20,12,.16); --tx:#0D1711; --tx-2:#55665C; --tx-3:#7A8A80;
+  --green:#159E57; --green-br:#17A95E; --green-dim:rgba(21,158,87,.10);
+  --amber:#A96F08; --amber-dim:rgba(169,111,8,.10);
+  --red:#C0392B; --red-dim:rgba(192,57,43,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--tx);
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--green);text-decoration:none}
+a:hover{opacity:.82}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:12px 26px;display:flex;align-items:center;gap:14px}
+.mono{width:30px;height:30px;border-radius:8px;background:var(--green);color:#06130B;
+  display:grid;place-items:center;font-weight:800;font-size:12.5px;flex:none}
+.nav a.back{font-size:14px;font-weight:600;color:var(--tx-2)}
+.nav a.back:hover{color:var(--tx);opacity:1}
+.nav-r{margin-left:auto;display:flex;gap:9px;align-items:center}
+.tbtn{padding:7px 13px;border-radius:9px;background:var(--surface);border:1px solid var(--line);
+  color:var(--tx-2);font:inherit;font-size:13px;font-weight:500;cursor:pointer}
+.cta{background:var(--green);color:#06130B;font-weight:700;font-size:13.5px;padding:8px 16px;border-radius:9px}
+.eyebrow{font-size:11.5px;font-weight:800;letter-spacing:.14em;color:var(--green);margin:0 0 18px}
+header{padding:70px 0 40px}
+h1{font-size:clamp(30px,5vw,52px);line-height:1.06;letter-spacing:-.035em;font-weight:800;margin:0 0 22px}
+.hook{font-size:19px;color:var(--tx-2);max-width:56ch;margin:0}
+.hook b{color:var(--tx);font-weight:600}
+.meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
+.meta span{font-size:12px;font-weight:700;background:var(--green-dim);color:var(--green);padding:5px 11px;border-radius:7px}
+section{padding:46px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(22px,3.2vw,30px);line-height:1.18;letter-spacing:-.025em;font-weight:800;margin:0 0 20px}
+h3{font-size:17px;font-weight:700;margin:0 0 9px}
+p{margin:0 0 16px;max-width:68ch}
+p:last-child{margin-bottom:0}
+.turn{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}
+.turn > div{border-radius:var(--r);padding:22px;border:1px solid var(--line);background:var(--surface)}
+.turn .was{border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0}
+.turn .is{border-left:3px solid var(--green);border-radius:0 var(--r) var(--r) 0}
+.turn h3{font-size:12px;letter-spacing:.1em;font-weight:800;margin-bottom:12px}
+.turn .was h3{color:var(--red)}
+.turn .is h3{color:var(--green)}
+.turn p{font-size:15.5px;color:var(--tx-2);margin:0}
+.turn p b{color:var(--tx);font-weight:700}
+.figs{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:26px 0}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:19px}
+.fig .n{font-size:27px;font-weight:800;letter-spacing:-.03em;color:var(--green);line-height:1}
+.fig .l{font-size:12.5px;color:var(--tx-2);margin-top:8px;line-height:1.45}
+figure{margin:26px 0 0}
+.shot{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface-2)}
+.shot img{width:100%;display:block}
+.shot .ph{padding:60px 24px;text-align:center;color:var(--tx-3);font-size:14px;
+  background:linear-gradient(160deg,var(--green-dim),transparent 60%)}
+figcaption{font-size:13px;color:var(--tx-3);margin-top:11px}
+ul{margin:0 0 16px;padding-left:19px;color:var(--tx-2);max-width:68ch}
+li{margin-bottom:9px}
+.build{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.build div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.build p{font-size:15px;color:var(--tx-2)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;
+  background:var(--surface-2);padding:2px 6px;border-radius:5px;color:var(--tx)}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;
+  overflow-x:auto;font-size:13px;line-height:1.6;margin:18px 0 0}
+pre code{background:none;padding:0;color:var(--tx-2)}
+footer{padding:34px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--tx-3);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+@media(max-width:820px){
+  .figs{grid-template-columns:repeat(2,1fr)}
+  .turn,.build{grid-template-columns:1fr}
+  header{padding:46px 0 32px}
+  section{padding:36px 0}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <span class="mono">MH</span>
+    <a class="back" href="index.html">Back to portfolio</a>
+    <div class="nav-r">
+      <button class="tbtn" id="theme" type="button">Theme</button>
+      <a class="cta" href="index.html#contact">Let's talk</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">CASE STUDY &middot; RIDE HAILING</p>
+    <h1>The client thought they needed more drivers.</h1>
+    <p class="hook">They didn't. Demand did outstrip supply, but drivers were sitting idle <b>72.3%</b> of the time while requests went unanswered. Hiring more drivers would have cost money and changed nothing. The constraint was not how many drivers were online. It was whether taking the ride was worth it.</p>
+    <div class="meta"><span>Power BI</span><span>DAX</span><span>Python</span><span>pandas</span><span>seaborn</span><span>Excel</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The brief, and where it was wrong</h2>
+    <p>Jeeny, a Middle Eastern ride hailing platform, came in with a hypothesis already formed: too many ride requests were going unfulfilled because there were not enough drivers on the road. The ask was to confirm it and size the shortfall.</p>
+    <p>The first pass supported them. Requests consistently ran ahead of completed rides. On that evidence alone the answer would have been to recruit, and the project would have ended there.</p>
+    <div class="turn">
+      <div class="was">
+        <h3>WHAT THE CLIENT BELIEVED</h3>
+        <p>Unfulfilled demand is a <b>supply shortage</b>. Not enough drivers are online to take the rides being requested.</p>
+      </div>
+      <div class="is">
+        <h3>WHAT THE DATA SHOWED</h3>
+        <p>Supply was short, but drivers were also <b>idle 72.3% of the time</b>. They were online and declining. The binding constraint was <b>acceptance</b>, not headcount.</p>
+      </div>
+    </div>
+    <p>Those two facts cannot both be explained by a shortage. If drivers were scarce and demand was high, idle time should have been low. It was not. That contradiction is the whole finding: supply was not being converted into rides, and adding more supply would have inherited the same conversion problem.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What the numbers said</h2>
+    <div class="figs">
+      <div class="fig"><div class="n">72.3%</div><div class="l">Driver idle rate</div></div>
+      <div class="fig"><div class="n">36.9%</div><div class="l">Demand fulfilment rate</div></div>
+      <div class="fig"><div class="n">375K</div><div class="l">Unfulfilled requests</div></div>
+      <div class="fig"><div class="n">2.1</div><div class="l">Rides per online hour</div></div>
+    </div>
+    <p>The funnel made the leak visible: <b>752K price checks</b> became <b>578K ride requests</b> and only <b>203K boarded rides</b>. Roughly two in three people who asked for a ride never took one.</p>
+    <p>Breaking fulfilment down by hour showed it was not uniform. The rate collapses to about 15% in the small hours and recovers through the morning, which is the signature of a pricing and incentive problem tracking the clock, not a fleet that vanishes overnight.</p>
+    <figure>
+      <div class="shot">
+        <img src="assets/jeeny-dashboard.png" alt="Power BI dashboard: driver idle rate, demand fulfilment rate, unfulfilled requests, conversion funnel, requests versus completed rides by day, fulfilment rate by hour, and an undersupply heat map by hour and weekday" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Dashboard screenshot&lt;/div&gt;'">
+      </div>
+      <figcaption>The Deep Dive report. Eighteen visuals on one page, filterable by month and weekday.</figcaption>
+    </figure>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <h2>Pinpointing when it hurts</h2>
+    <p>A total is not actionable. Operations needs to know which shift to fix first, so the last view maps average unfulfilled requests across all 168 day and hour combinations and flags the worst one automatically.</p>
+    <p>The answer: <b>Sunday at 07:00</b>, where roughly <b>396 requests an hour</b> go unanswered. That is a specific shift a pricing rule can target, rather than a platform wide intervention.</p>
+    <p>That view is not a stock Power BI visual. It is a Python visual running inside the report, so the annotation finds the peak in the data rather than being typed in by hand and going stale the moment the filters change.</p>
+    <pre><code>r, c = np.unravel_index(np.nanargmax(pivot.values), pivot.shape)
+ax.add_patch(patches.Rectangle((c, r), 1, 1, fill=False, edgecolor=INK, lw=2.5))
+day, hour, val = pivot.index[r], int(pivot.columns[c]), pivot.values[r, c]
+fig.text(0.5, 0.02, f'Biggest gap: {day} at {hour}:00, about {val:.0f} requests go unfulfilled per hour')</code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The recommendation</h2>
+    <p>Because the problem was acceptance rather than headcount, recruitment was the wrong lever. Two changes were proposed, both aimed at making the marginal ride worth taking at the moment it is offered.</p>
+    <ul>
+      <li><b>Demand based dynamic pricing.</b> Fares that move with demand level and time of day, so that the hours with the worst fulfilment carry the strongest incentive to accept. The heat map gives the exact windows to price up.</li>
+      <li><b>A fare negotiation option.</b> Let riders and drivers settle on a price rather than forcing a take it or leave it fare, which converts some of the requests that currently die at the decline into completed rides.</li>
+    </ul>
+    <p>Both are cheaper than recruiting, and both can be tested against the same fulfilment rate the dashboard already tracks, so the fix is measurable in the tool that found the problem.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How it was built</h2>
+    <div class="build">
+      <div>
+        <h3>Power BI</h3>
+        <p>A single Deep Dive page carrying eighteen visuals: KPI cards, a conversion funnel, daily demand against completed rides, requests versus completions by weekday, and fulfilment rate by hour. Month and weekday slicers drive the whole page.</p>
+      </div>
+      <div>
+        <h3>Python inside the report</h3>
+        <p>The undersupply heat map is a Python visual using <code>pandas</code>, <code>seaborn</code> and <code>matplotlib</code>, with a custom colour ramp and <code>numpy</code> locating the worst day and hour so the caption updates itself as filters change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What I would do next</h2>
+    <ul>
+      <li>Split idle time by driver cohort to see whether declines concentrate in a minority of drivers or are spread across the fleet. The fix differs sharply depending on which.</li>
+      <li>Model the fare elasticity needed to lift acceptance in the worst windows, so the pricing change ships with a target rather than a direction.</li>
+      <li>Track fulfilment rate against the same hour and weekday grid after rollout, using the existing report as the control.</li>
+    </ul>
+  </div>
+</section>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap">
+  <a href="index.html">Back to portfolio</a>
+  <a href="https://github.com/Mharis-khan/JEENY-Case-Study" target="_blank" rel="noopener">Repository</a>
+</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme');
+  try{ var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s); }catch(e){}
+  btn.addEventListener('click',function(){
+    var n=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',n);
+    try{ localStorage.setItem('theme',n); }catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
