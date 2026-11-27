@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COVID-19 global analysis | Muhammad Haris Khan</title>
+<meta name="description" content="383,720 records across 243 countries. Separating what the data said about COVID from what it said about testing capacity, then predicting deaths with Prophet and a decision tree.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080B09; --surface:#0F1411; --surface-2:#141A16; --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.14); --tx:#E9EFEA; --tx-2:#98A69D; --tx-3:#6B7A71;
+  --green:#4ADE80; --green-br:#5BE49B; --green-dim:rgba(74,222,128,.12);
+  --amber:#F4B740; --amber-dim:rgba(244,183,64,.12);
+  --red:#F87171; --red-dim:rgba(248,113,113,.12);
+  --maxw:980px; --r:14px;
+}
+[data-theme="light"]{
+  --bg:#F7F9F7; --surface:#FFFFFF; --surface-2:#F1F4F2; --line:rgba(8,20,12,.10);
+  --line-2:rgba(8,20,12,.16); --tx:#0D1711; --tx-2:#55665C; --tx-3:#7A8A80;
+  --green:#159E57; --green-br:#17A95E; --green-dim:rgba(21,158,87,.10);
+  --amber:#A96F08; --amber-dim:rgba(169,111,8,.10);
+  --red:#C0392B; --red-dim:rgba(192,57,43,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--tx);
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--green);text-decoration:none}
+a:hover{opacity:.82}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:12px 26px;display:flex;align-items:center;gap:14px}
+.mono{width:30px;height:30px;border-radius:8px;background:var(--green);color:#06130B;
+  display:grid;place-items:center;font-weight:800;font-size:12.5px;flex:none}
+.nav a.back{font-size:14px;font-weight:600;color:var(--tx-2)}
+.nav a.back:hover{color:var(--tx);opacity:1}
+.nav-r{margin-left:auto;display:flex;gap:9px;align-items:center}
+.tbtn{padding:7px 13px;border-radius:9px;background:var(--surface);border:1px solid var(--line);
+  color:var(--tx-2);font:inherit;font-size:13px;font-weight:500;cursor:pointer}
+.cta{background:var(--green);color:#06130B;font-weight:700;font-size:13.5px;padding:8px 16px;border-radius:9px}
+.eyebrow{font-size:11.5px;font-weight:800;letter-spacing:.14em;color:var(--green);margin:0 0 18px}
+header{padding:70px 0 40px}
+h1{font-size:clamp(30px,5vw,52px);line-height:1.06;letter-spacing:-.035em;font-weight:800;margin:0 0 22px}
+.hook{font-size:19px;color:var(--tx-2);max-width:56ch;margin:0}
+.hook b{color:var(--tx);font-weight:600}
+.meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
+.meta span{font-size:12px;font-weight:700;background:var(--green-dim);color:var(--green);padding:5px 11px;border-radius:7px}
+section{padding:46px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(22px,3.2vw,30px);line-height:1.18;letter-spacing:-.025em;font-weight:800;margin:0 0 20px}
+h3{font-size:17px;font-weight:700;margin:0 0 9px}
+p{margin:0 0 16px;max-width:68ch}
+p:last-child{margin-bottom:0}
+.turn{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}
+.turn > div{border-radius:var(--r);padding:22px;border:1px solid var(--line);background:var(--surface)}
+.turn .was{border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0}
+.turn .is{border-left:3px solid var(--green);border-radius:0 var(--r) var(--r) 0}
+.turn h3{font-size:12px;letter-spacing:.1em;font-weight:800;margin-bottom:12px}
+.turn .was h3{color:var(--red)}
+.turn .is h3{color:var(--green)}
+.turn p{font-size:15.5px;color:var(--tx-2);margin:0}
+.turn p b{color:var(--tx);font-weight:700}
+.figs{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:26px 0}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:19px}
+.fig .n{font-size:27px;font-weight:800;letter-spacing:-.03em;color:var(--green);line-height:1}
+.fig .l{font-size:12.5px;color:var(--tx-2);margin-top:8px;line-height:1.45}
+figure{margin:26px 0 0}
+.shot{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface-2)}
+.shot img{width:100%;display:block}
+.shot .ph{padding:60px 24px;text-align:center;color:var(--tx-3);font-size:14px;
+  background:linear-gradient(160deg,var(--green-dim),transparent 60%)}
+figcaption{font-size:13px;color:var(--tx-3);margin-top:11px}
+ul{margin:0 0 16px;padding-left:19px;color:var(--tx-2);max-width:68ch}
+li{margin-bottom:9px}
+.build{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.build div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.build p{font-size:15px;color:var(--tx-2)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;
+  background:var(--surface-2);padding:2px 6px;border-radius:5px;color:var(--tx)}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;
+  overflow-x:auto;font-size:13px;line-height:1.6;margin:18px 0 0}
+pre code{background:none;padding:0;color:var(--tx-2)}
+table{width:100%;border-collapse:collapse;margin:22px 0 0;font-size:14.5px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--tx-3);font-size:12px;font-weight:700;letter-spacing:.06em}
+td{color:var(--tx-2)}
+td.w{color:var(--green);font-weight:700}
+tr.big td{color:var(--tx);font-weight:700}
+.note{background:var(--amber-dim);border-left:3px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+  padding:20px 22px;margin:26px 0 0}
+.note h3{color:var(--amber);font-size:12px;letter-spacing:.1em;font-weight:800;margin-bottom:10px}
+.note p{font-size:15.5px;color:var(--tx-2);margin:0}
+.note p b{color:var(--tx)}
+footer{padding:34px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--tx-3);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+@media(max-width:820px){
+  .figs{grid-template-columns:repeat(2,1fr)}
+  .turn,.build{grid-template-columns:1fr}
+  header{padding:46px 0 32px}
+  section{padding:36px 0}
+}
+
+figure img{width:100%;display:block;border-radius:var(--r);border:1px solid var(--line);background:var(--surface)}
+.qs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 0}
+.qs div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+.qs b{display:block;color:var(--tx);font-size:14.5px;margin-bottom:6px}
+.qs p{font-size:14.5px;color:var(--tx-2);margin:0}
+@media(max-width:820px){.qs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <span class="mono">MH</span>
+    <a class="back" href="index.html">Back to portfolio</a>
+    <div class="nav-r">
+      <button class="tbtn" id="theme" type="button">Theme</button>
+      <a class="cta" href="index.html#contact">Let's talk</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">CASE STUDY &middot; EXPLORATORY ANALYSIS AND MODELLING</p>
+    <h1>Why did richer, cleaner countries report more COVID cases?</h1>
+    <p class="hook">Across 243 countries the data said two things that cannot be true. The more <b>handwashing facilities</b> a country had, the more cases it reported. The <b>richer</b> it was, the more cases it reported. Neither finding is about the virus. Reported cases count the infections a country is able to find, and richer countries test more. Separating what this data said about COVID from what it said about testing was most of the work.</p>
+    <div class="meta"><span>Python</span><span>R</span><span>Prophet</span><span>Decision trees</span><span>EDA</span><span>383,720 records</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The dataset</h2>
+    <p>383,720 records across 243 countries and 6 continents, with 67 features per row, drawn from the WHO Coronavirus Dashboard, the United Nations and the World Bank. Alongside cases and deaths it carries vaccination coverage, access to handwashing facilities, GDP per capita and the Human Development Index, which is what makes it possible to ask why outcomes differed rather than only by how much.</p>
+    <p>Four cleaning decisions shaped everything after them:</p>
+    <div class="qs">
+      <div><b>Dropped the aggregates</b><p>Entries like "high income" are groupings, not countries. Left in, they double count every country inside them.</p></div>
+      <div><b>Added a season column</b><p>Derived from hemisphere, so a July reading in Argentina is compared as winter rather than as summer.</p></div>
+      <div><b>Froze the window at 2022</b><p>COVID figures are revised continuously. Fixing the period makes the analysis reproducible rather than a moving target.</p></div>
+      <div><b>Filled gaps with zero</b><p>The decision I would change. More on that at the end.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Two findings that were not about the virus</h2>
+    <p>Plotting access to handwashing facilities against total cases per million produced the opposite of the expected relationship. Countries with better hygiene infrastructure reported <b>more</b> cases, not fewer. GDP per capita against cases per million showed no clean linear trend either.</p>
+    <p>The temptation is to report both as findings. They are not. A confirmed case requires a test, so the case count measures a country's capacity to detect infections at least as much as the number of infections. Wealthier countries test more, report more consistently, and therefore record higher case numbers from the same underlying spread. Hygiene access and GDP are both standing in for development, and development is standing in for detection.</p>
+    <p>That reading changes what the variable is usable for. Anything built on reported cases is partly modelling a country's health reporting system, and the honest move is to say so rather than publish a correlation that implies soap spreads the virus.</p>
+    <figure>
+      <img src="assets/covid-analysis.svg" alt="Summary of the COVID-19 analysis showing dataset scale, model comparison by R squared and prediction error, the continent and seasonal findings, and the testing capacity explanation">
+      <figcaption>The analysis in summary. Model metrics are the measured values from the project.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What did hold up</h2>
+    <ul>
+      <li><b>Cases and deaths do not track each other.</b> Asia recorded the highest case rates, followed by Europe and North America, but South America carried a higher mortality rate on lower case counts. Whatever drives infection and whatever drives death are not the same variable.</li>
+      <li><b>Seasonality is real.</b> Total cases peaked in different seasons across continents, and the Prophet model picked up a clear yearly cycle, with 2021 rising sharply from around day 210 before falling away.</li>
+      <li><b>Spread was uneven in variance, not just in level.</b> Asia and Europe held high median case numbers with very wide spread, consistent with differences in density, policy and testing. Oceania stayed low with few outliers in every season.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Predicting deaths, and why the model choice mattered more than the tuning</h2>
+    <p>I tested two approaches against the same target. Prophet treats deaths as a time series and predicts from the date. A decision tree regressor predicts from the features.</p>
+    <table>
+      <tr><th>Metric</th><th>Prophet</th><th>Decision tree</th></tr>
+      <tr><td>MAE</td><td>110.378</td><td class="w">20.426</td></tr>
+      <tr><td>RMSE</td><td>838.581</td><td class="w">387.911</td></tr>
+      <tr class="big"><td>R&sup2;</td><td>0.000565</td><td class="w">0.916</td></tr>
+    </table>
+    <p>Prophet's average error looks tolerable in isolation. Its R&sup2; of 0.000565 says the rest: it explained essentially none of the variation around the mean. Knowing the date tells you almost nothing about how many people died that day. The decision tree cut average error by more than five times and explained 92% of the variance, because the answer was in the country level features rather than in the calendar.</p>
+    <p>The useful lesson is not that one library beat another. It is that a weak result from a time series model was evidence about the problem, not a reason to tune the model harder.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What I would do next</h2>
+    <ul>
+      <li><b>Stop filling missing values with zero.</b> Zero says a country recorded none; missing says nobody knows. Collapsing the two pushes in exactly the direction of the testing artefact above, since the countries with gaps are the ones least able to test. Flag them as missing and model them as missing.</li>
+      <li><b>Normalise cases by tests performed, not by population.</b> That measures detection directly instead of leaving it tangled up in GDP and hygiene access.</li>
+      <li><b>Check the decision tree for leakage.</b> An R&sup2; of 0.916 on a 67 feature dataset that also contains case counts invites the question of whether the model is reading a near duplicate of the target. Until that is ruled out on held out data, treat the number as promising rather than proven.</li>
+    </ul>
+    <div class="note">
+      <h3>ABOUT THIS PROJECT</h3>
+      <p>The analysis was written up and published on Medium as <b>Behind the Curve: Understanding COVID-19 Through Data</b>, co-written with two collaborators.</p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap">
+  <a href="index.html">Back to portfolio</a>
+  <a href="https://github.com/Mharis-khan" target="_blank" rel="noopener">GitHub</a>
+</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme');
+  try{ var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s); }catch(e){}
+  btn.addEventListener('click',function(){
+    var n=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',n);
+    try{ localStorage.setItem('theme',n); }catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
