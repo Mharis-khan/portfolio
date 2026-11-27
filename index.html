@@ -326,14 +326,15 @@ footer{padding:26px 0;border-top:1px solid var(--line);font-size:13px;color:var(
       </article>
       <article class="pcard">
         <div class="shot">
-          <div class="fake"><b></b><b></b><b></b></div>
-          <a class="open" href="https://github.com/Mharis-khan" target="_blank" rel="noopener" aria-label="Open COVID analysis project">&#8599;</a>
+          <img src="assets/covid-analysis.svg" alt="COVID-19 analysis summary showing dataset scale, model comparison and the testing capacity finding">
+          <a class="open" href="covid.html" aria-label="Read the COVID-19 case study">&#8599;</a>
         </div>
         <div class="pbody">
-          <span class="tag t-blue">PYTHON &middot; MACHINE LEARNING</span>
-          <h3>What actually explained how hard COVID hit a country?</h3>
-          <p>383,720 records across 243 countries and 67 indicators. Wealth did not explain it: GDP per capita showed no clear link to case rates. Handwashing access came out positively associated with reported cases, a result worth treating carefully, since reported cases measure testing capacity as much as infection.</p>
-          <div class="tools"><span>Python</span><span>Machine learning</span><span>R</span></div>
+          <span class="tag t-blue">PYTHON &middot; R &middot; MACHINE LEARNING</span>
+          <h3>Why did richer, cleaner countries report more COVID cases?</h3>
+          <p>Across 243 countries, better handwashing access and higher GDP both came with more reported cases, which cannot mean what it looks like. A confirmed case needs a test, so the count tracks a country's ability to find infections. I separated that from the real findings, then predicted deaths: a decision tree explained 92% of the variance where a time series model explained none.</p>
+          <div class="tools"><span>Python</span><span>R</span><span>Prophet</span><span>Decision trees</span></div>
+          <a href="covid.html" style="font-size:13.5px;font-weight:700">Read the case study</a>
         </div>
       </article>
       <article class="pcard">
