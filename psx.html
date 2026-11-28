@@ -131,7 +131,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);font-size:13.5px;color:va
 <section>
   <div class="wrap">
     <h2>The question</h2>
-    <p>If you were allocating across the KSE-30, Pakistan's thirty most liquid listed companies, how should the money be split, and what actually drives the difference between a good holding and a bad one?</p>
+    <p>If you were allocating across the KSE-30, Pakistan's thirty most liquid listed companies, how should the money be split across the twenty with a usable three year history, and what actually drives the difference between a good holding and a bad one?</p>
     <p>Answering that needed three things that did not exist together anywhere: current prices, a way to turn three years of daily returns into an allocation, and a view of what was driving the result. I built all three.</p>
   </div>
 </section>
@@ -151,36 +151,34 @@ footer{padding:34px 0;border-top:1px solid var(--line);font-size:13.5px;color:va
 <section>
   <div class="wrap">
     <h2>The allocation Solver produced</h2>
-    <p>Maximising portfolio Sharpe subject to the weights summing to 100% returned a deliberately concentrated book. Two names take <b>58%</b> of the capital and the top three take <b>68%</b>, while one is effectively dropped.</p>
+    <p>Maximising portfolio Sharpe across twenty KSE-30 names, with no short selling and a <b>15% cap</b> on any single position, holds nine and drops eleven to zero. Three names sit at the cap and the top five carry <b>72%</b> of the capital.</p>
     <table>
       <thead><tr><th>Ticker</th><th>Daily expected return</th><th>Allocation</th></tr></thead>
       <tbody>
-        <tr class="big"><td>FFC &middot; Fauji Fertilizer</td><td>0.25%</td><td class="w">30.33%</td></tr>
-        <tr class="big"><td>SAZEW &middot; Sazgar Engineering</td><td>0.51%</td><td class="w">28.20%</td></tr>
-        <tr><td>GAL</td><td>0.42%</td><td class="w">9.63%</td></tr>
-        <tr><td>ATRL &middot; Attock Refinery</td><td>0.23%</td><td class="w">7.81%</td></tr>
-        <tr><td>GHNI</td><td>0.37%</td><td class="w">7.24%</td></tr>
-        <tr><td>OGDC</td><td>0.19%</td><td class="w">5.49%</td></tr>
-        <tr><td>FCCL</td><td>0.23%</td><td class="w">4.60%</td></tr>
-        <tr><td>ENGROH</td><td>0.18%</td><td class="w">3.96%</td></tr>
-        <tr><td>EFERT &middot; Engro Fertilizers</td><td>0.13%</td><td class="w">2.64%</td></tr>
-        <tr><td>PAEL</td><td>0.23%</td><td class="w">0.11%</td></tr>
-      </tbody>
-    </table>
+        <tr class="big"><td>FFC &middot; Fauji Fertilizer</td><td>0.25%</td><td class="w">15.00%</td></tr>
+        <tr class="big"><td>SAZEW &middot; Sazgar Engineering</td><td>0.51%</td><td class="w">15.00%</td></tr>
+        <tr class="big"><td>GAL &middot; Ghandhara Automobiles</td><td>0.42%</td><td class="w">15.00%</td></tr>
+        <tr><td>ATRL &middot; Attock Refinery</td><td>0.23%</td><td class="w">13.92%</td></tr>
+        <tr><td>GHNI &middot; Ghani Glass</td><td>0.37%</td><td class="w">13.48%</td></tr>
+        <tr><td>FCCL &middot; Fauji Cement</td><td>0.23%</td><td class="w">7.53%</td></tr>
+        <tr><td>ENGROH &middot; Engro Holdings</td><td>0.18%</td><td class="w">7.41%</td></tr>
+        <tr><td>OGDC &middot; Oil and Gas Development</td><td>0.19%</td><td class="w">7.04%</td></tr>
+        <tr><td>EFERT &middot; Engro Fertilizers</td><td>0.13%</td><td class="w">5.63%</td></tr>
+      </tbody>    </table>
     <h3 style="margin-top:34px">The biggest holding is not the best performer</h3>
-    <p>FFC takes the largest allocation at 30% while ranking only <b>fourth</b> on daily expected return. SAZEW has double FFC's return and gets less weight. PAEL matches ATRL's return exactly and is allocated almost nothing.</p>
+    <p>FFC sits at the 15% cap while ranking only <b>fourth</b> on daily expected return, behind SAZEW, GAL and GHNI. PAEL matches ATRL's return almost exactly and is dropped entirely.</p>
     <p>That is the optimiser doing its job. Sharpe maximisation prices in volatility and how each holding moves against the others, so a steadier mid return name earns weight that a higher return, higher variance name does not. Ranking by return alone would have produced a different and worse book.</p>
     <h3 style="margin-top:34px">Two tools, same answer</h3>
     <p>The Excel optimiser and the Power BI report were built separately and agree. Solver put its two largest weights in FFC and SAZEW. The dashboard's Sharpe ratio table independently ranks <b>Sazgar Engineering at 1.03</b> and <b>Fauji Fertilizer at 0.94</b> as the two best risk adjusted performers in the index. Arriving at the same conclusion by two routes is the closest thing to a check this analysis has.</p>
     <div class="note">
       <h3>WHAT THESE NUMBERS ARE NOT</h3>
-      <p>The optimised portfolio reports an annualised return of <b>84%</b>, risk of <b>26%</b> and a Sharpe of <b>3.28</b>. Those are <b>in sample</b> figures. Solver was asked to find the weights that maximise Sharpe on exactly the three years of returns used to measure it, so the result is fitted to that window and will not repeat out of sample. A Sharpe above 3 is not a realistic forward expectation for a long only equity book. The allocation is a defensible starting point and the method is sound; the performance figures are an upper bound on a known period, not a forecast.</p>
+      <p>The optimised portfolio reports an annualised return of <b>77.9%</b>, risk of <b>31.7%</b> and a Sharpe of <b>2.11</b>, net of an 11% risk free rate. Those are <b>in sample</b> figures. The weights were chosen to maximise Sharpe on exactly the three years of returns used to measure it, so the result is fitted to that window and will not repeat out of sample. The allocation is a defensible starting point and the method is sound; the performance figures are an upper bound on a known period, not a forecast.</p>
     </div>
     <figure>
       <div class="shot">
-        <img src="assets/psx-solver.png" alt="Excel Solver output showing per stock expected returns, optimised allocation weights summing to 100%, and portfolio expected return, variance, risk and Sharpe ratio on daily and annualised bases" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Solver output&lt;/div&gt;'">
+        <img src="assets/psx-solver.svg" alt="Excel Solver output showing per stock expected returns, optimised allocation weights summing to 100%, and portfolio expected return, variance, risk and Sharpe ratio on daily and annualised bases" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Solver output&lt;/div&gt;'">
       </div>
-      <figcaption>Excel Solver output: per stock weights and the resulting portfolio return, risk and Sharpe, daily and annualised.</figcaption>
+      <figcaption>The optimised allocation and the resulting annualised return, risk and Sharpe.</figcaption>
     </figure>
   </div>
 </section>
@@ -214,7 +212,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);font-size:13.5px;color:va
     <h2>What I would do next</h2>
     <ul>
       <li>Test whether the autumn effect survives out of sample, or whether it is an artefact of 2024 being the one strong year in the window.</li>
-      <li>Re-run the Solver allocation on a rolling window and test it forward on held out data, which is the only way to know how much of the 3.28 Sharpe is signal and how much is fitting.</li>
+      <li>Re-run the Solver allocation on a rolling window and test it forward on held out data, which is the only way to know how much of the 2.11 Sharpe is signal and how much is fitting.</li>
       <li>Add a transaction cost assumption. With average gains and losses both around 2%, costs are large enough relative to the edge to change the ranking.</li>
     </ul>
   </div>
